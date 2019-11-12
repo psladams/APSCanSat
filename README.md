@@ -1,3 +1,3 @@
 # APSCanSat
-bairly funcitoning
+bairly funcitonings
 thank you for read
