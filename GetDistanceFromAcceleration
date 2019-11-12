@@ -3,25 +3,31 @@ let recording = false
 let accel_data: number[] = []
 input.setAccelerometerRange(AcceleratorRange.EightG)
 
+
+serial.writeString("testing")
 input.onButtonPressed(Button.A, function () {
     recording = true
     while (recording) {
         acceleration = input.acceleration(Dimension.Strength)
         accel_data.push(acceleration)
         control.waitMicros(100)
-        basic.showNumber(acceleration)
-        serial.writeNumber(acceleration)
+        //basic.showNumber(acceleration)
+        //serial.writeNumber(acceleration)
+
     }
 })
 
 input.onButtonPressed(Button.B, function () {
     recording = false
     let vel_data: number[] = []
-    let len = accel_data.length
+    let len: number = accel_data.length
     for (let i = 0; i < len + 1; i++) {
         let velocity = integrate(accel_data, i)
         vel_data.push(velocity)
     }
+    let d: number = integrate(vel_data, len)
+    serial.writeNumber(d)
+    basic.showNumber(acceleration)
 })
 
 function integrate(f: number[], b: number) {
