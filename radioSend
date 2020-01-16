@@ -1,0 +1,24 @@
+radio.onReceivedNumber(function (receivedNumber) {
+    for (let i = 0; i <= clockList.length - 1; i++) {
+        if (clockList[i] == receivedNumber) {
+            radio.sendValue(text_list[i], clockList[i])
+        }
+    }
+})
+let data = ""
+let text_list: number[] = []
+let clockList: number[] = []
+clockList = []
+text_list = []
+radio.setGroup(206)
+let clock = 0
+basic.forever(function () {
+    data = "ax" + input.acceleration(Dimension.X).toString() + "\\nay" + input.acceleration(Dimension.Y).toString() + "\\naz" + input.acceleration(Dimension.Z).toString() + "\\n"
+    clockList.push(clock)
+    text_list.push(data)
+    radio.sendValue(data, clock)
+    clock += 1
+    while (input.runningTime() < clock * 1000) {
+        basic.pause(1)
+    }
+})
