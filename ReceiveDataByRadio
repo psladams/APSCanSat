@@ -1,0 +1,15 @@
+radio.onReceivedValue(function (name, value) {
+    if (value == Clock) {
+        let list: string[] = []
+        list.push("" + name + "Clock" + value)
+        Clock += 1
+        basic.showNumber(Clock)
+    } else {
+        radio.sendNumber(Clock)
+    }
+})
+let Clock = 0
+Clock = 0
+radio.setGroup(206)
+let dataList = []
+basic.showNumber(Clock)
